@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess My Number Game</title>
+    <style>
+        body {
+            background-color: #222;
+            color: #eee;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        .number {
+            width: 15rem;
+            height: 6rem;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background-color: #eee;
+            color: #222;
+            display: inline-block;
+            line-height: 6rem;
+        }
+        
+        .message {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .guess {
+            width: 3rem;
+            height: 2rem;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .again {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="number">?</div>
+        <p class="message">Start guessing...</p>
+        <p class="score">Score: <span id="score">20</span></p>
+        <input type="number" class="guess" min="1" max="20" placeholder="Your guess...">
+        <button class="again">Again!</button>
+    </div>
+
+    <script>
+        // JavaScript code to implement the game reset functionality
+        let score = 20;
+        let secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+        document.querySelector('.again').addEventListener('click', function() {
+            // Step 2: Restore initial values of the 'score' and 'secretNumber' variables
+            score = 20;
+            secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+            // Step 3: Restore the initial conditions of the message, number, score, and guess input fields
+            document.querySelector('.message').textContent = 'Start guessing...';
+            document.querySelector('.number').textContent = '?';
+            document.getElementById('score').textContent = score;
+            document.querySelector('.guess').value = '';
+
+            // Step 4: Restore the original background color (#222) and number width (15rem)
+            document.querySelector('body').style.backgroundColor = '#222';
+            document.querySelector('.number').style.width = '15rem';
+        });
+    </script>
+</body>
+
+</html>
