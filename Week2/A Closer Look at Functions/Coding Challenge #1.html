@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poll App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Poll App</h1>
+  <button id="pollBtn">Answer poll</button>
+
+  <script>
+    const poll = {
+      question: 'What is your favourite programming language?',
+      options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+      answers: new Array(4).fill(0), // Mảng lưu số lượng câu trả lời, khởi tạo giá trị là 0
+
+      // 1. Phương thức đăng ký câu trả lời mới
+      registerNewAnswer() {
+        // Hiển thị cửa sổ nhập câu trả lời
+        const answer = Number(
+          prompt(
+            `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+          )
+        );
+
+        // Kiểm tra đầu vào hợp lệ (là số và nằm trong giới hạn)
+        if (typeof answer === 'number' && answer >= 0 && answer < this.answers.length) {
+          this.answers[answer]++;
+        } else {
+          alert('Invalid input, please try again!');
+        }
+
+        // Gọi phương thức hiển thị kết quả
+        this.displayResults('string');
+        this.displayResults();
+      },
+
+      // 3. Phương thức hiển thị kết quả
+      displayResults(type = 'array') {
+        if (type === 'string') {
+          console.log(`Poll results are ${this.answers.join(', ')}`);
+        } else if (type === 'array') {
+          console.log(this.answers);
+        }
+      },
+    };
+
+    // 2. Gọi phương thức khi người dùng nhấn nút "Answer poll"
+    document.getElementById('pollBtn').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+    // Dữ liệu bonus
+    const testData1 = [5, 2, 3];
+    const testData2 = [1, 5, 3, 9, 6, 1];
+
+    // Hàm hiển thị kết quả cho dữ liệu ngoài đối tượng poll
+    poll.displayResults.call({ answers: testData1 }, 'array');
+    poll.displayResults.call({ answers: testData1 }, 'string');
+    poll.displayResults.call({ answers: testData2 }, 'array');
+    poll.displayResults.call({ answers: testData2 }, 'string');
+  </script>
+</body>
+</html>
