@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IIFE Challenge</title>
+  <style>
+    h1 {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="header">Bấm vào bất kỳ đâu trên trang!</h1>
+
+  <script>
+    (function () {
+      const header = document.querySelector('#header');
+      header.style.color = 'red'; // Màu ban đầu
+
+      // Thêm sự kiện thay đổi màu khi click vào body
+      document.body.addEventListener('click', function () {
+        header.style.color = 'blue'; // Đổi màu thành xanh khi click vào body
+      });
+    })();
+  </script>
+</body>
+</html>
